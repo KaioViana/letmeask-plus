@@ -1,8 +1,9 @@
 from twitchio.ext import commands
 from dynaconf import settings
-import json
+from firebase import config
 
 
+connection = config.connect()
 class Bot(commands.Bot):
 
     def __init__(self):
@@ -14,6 +15,9 @@ class Bot(commands.Bot):
         print(f'Ready | {self.nick}')
 
     async def event_message(self, message):
+        ref = connection.reference('/gaules')
+        messages_ref = ref.child('messages')
+
         payload = {
           'id': str(message.id),
           'author': str(message.author.name),
@@ -21,15 +25,16 @@ class Bot(commands.Bot):
           'tags': str(message.tags),
         }
 
+        messages_ref.push(payload)
 
-        payload_json = json.dumps(payload)
-        print(payload_json)
+        print(payload)
+
         await self.handle_commands(message)
 
     # Commands use a decorator...
-    @commands.command(name='test')
-    async def my_command(self, ctx):
-        await ctx.send(f'Hello {ctx.author.name}!')
+    # @commands.command(name='test')
+    # async def my_command(self, ctx):
+    #     await ctx.send(f'Hello {ctx.author.name}!')
 
 
 if __name__ == '__main__':
