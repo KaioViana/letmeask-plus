@@ -3,10 +3,11 @@ from dynaconf import settings
 from firebase import config
 
 
-connection = config.connect()
 class Bot(commands.Bot):
 
     def __init__(self):
+        connection_firebase = config.connect() # connect firebase
+
         super().__init__(token=settings.TWITCH_TOKEN, client_id=settings.TWITCH_CLIENT_ID, nick='ROBOT_DEV', prefix='!',
                          initial_channels=['Gaules'])
 
@@ -14,8 +15,8 @@ class Bot(commands.Bot):
     async def event_ready(self):
         print(f'Ready | {self.nick}')
 
-    async def event_message(self, message):
-        ref = connection.reference('/gaules')
+    async def event_message(self, message): 
+        ref = connection_firebase.reference('/gaules')
         messages_ref = ref.child('messages')
 
         payload = {
