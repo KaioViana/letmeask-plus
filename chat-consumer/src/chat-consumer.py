@@ -37,11 +37,8 @@ class Bot(commands.Bot):
           'created_at': datetime.utcnow()
         }
 
-        await self.messages_ref.push(payload)
+        self.messages_ref.push(payload)
         self.messages_collection.insert_one(payload)
-
-
-        print(payload)
 
         await self.handle_commands(message)
 
