@@ -17,7 +17,6 @@ class Bot(commands.Bot):
 
         self.mongo = connect() # connect mongo
         self.messages_collection = self.mongo['gaules']
-        self.count = 0  # temp count
 
 
     # Events don't need decorators when subclassed
@@ -25,10 +24,6 @@ class Bot(commands.Bot):
         print(f'Ready | {self.nick}')
 
     async def event_message(self, message):
-        with open('count.txt', 'w') as file:
-            self.count += 1
-            file.write(str(self.count))
-
         payload = {
           'id': str(message.id),
           'author': str(message.author.name),
@@ -37,7 +32,7 @@ class Bot(commands.Bot):
           'created_at': datetime.utcnow()
         }
 
-        self.messages_ref.push(payload)
+        # self.messages_ref.push(payload) -> NÃO NECESSÁRIO POR AGORA
         self.messages_collection.insert_one(payload)
 
         await self.handle_commands(message)

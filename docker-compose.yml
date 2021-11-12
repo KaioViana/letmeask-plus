@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  chat-consumer:
+    build:
+      context: .
+      dockerfile: chat-consumer/Dockerfile
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.2
+    container_name: mongodb
+    restart: always
+    ports:
+      - ${DB_PORT_DEV}:27017
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME_DEV}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER_DEV}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS_DEV}

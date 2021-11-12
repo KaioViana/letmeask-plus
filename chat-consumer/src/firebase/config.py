@@ -6,8 +6,7 @@ from firebase_admin import db
 
 
 def connect():
-  print(settings.FIREBASE_CONFIG_PATH)
-  cred = credentials.Certificate(settings.FIREBASE_CONFIG_PATH)
+  cred = credentials.Certificate(settings.FIREBASE_CONFIG_AUTH)
 
   firebase_admin.initialize_app(cred, { 'databaseURL': settings.FIREBASE_DATABASE_URL })
   
