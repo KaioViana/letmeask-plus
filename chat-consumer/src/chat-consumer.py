@@ -33,6 +33,7 @@ class Bot(commands.Bot):
         }
 
         # self.messages_ref.push(payload) -> NÃO NECESSÁRIO POR AGORA
+        print(payload)
         self.messages_collection.insert_one(payload)
 
         await self.handle_commands(message)
