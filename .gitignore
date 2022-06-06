@@ -127,4 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-letmeask-plus-firebase-adminsdk-a4m2s-bfbecb9851.json
+letmeask-plus-firebase-adminsdk-a4m2s-7f7e31ff1c.json
+
+# Ignore dynaconf secret files
+.secrets.*
