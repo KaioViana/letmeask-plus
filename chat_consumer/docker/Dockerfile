@@ -1,9 +1,11 @@
 # syntax=docker/dockerfile:1
-ARG APP_NAME=chat-consumer
+# GERENCIADOR DE CONFIGURAÇÃO TERRAFORM, VALIDAR DEPOIS ***
+
+ARG APP_NAME=chat_consumer
 ARG APP_PATH=/opt/$APP_NAME
 
 #STAGING
-FROM python:3.9.7-slim-buster as staging
+FROM python:latest as staging
 ARG APP_NAME
 ARG APP_PATH
 
@@ -20,7 +22,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
 WORKDIR $APP_PATH
-COPY . ./$APP_NAME
+COPY ./chat_consumer/ .
 
 #DEVELOPMENT
 FROM staging as development
@@ -30,4 +32,5 @@ WORKDIR $APP_PATH
 
 RUN poetry install
 
-
+ENTRYPOINT ["poetry", "run"]
+CMD ["python", "src/chat_consumer.py"]

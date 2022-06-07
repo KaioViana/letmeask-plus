@@ -12,7 +12,7 @@ class Bot(commands.Bot):
         super().__init__(token=settings.TWITCH_TOKEN, client_id=settings.TWITCH_CLIENT_ID, nick='ROBOT_DEV', prefix='!',
                          initial_channels=['Gaules'])
 
-        self.connection_firebase = config.connect()  # connect firebase
+        self.connection_firebase = firebase_config.connect()  # connect firebase
         self.ref = self.connection_firebase.reference('/gaules')
         self.messages_ref = self.ref.child('messages')
 
@@ -30,7 +30,7 @@ class Bot(commands.Bot):
             'author': str(message.author.name),
             'content': str(message.content),
             'tags': message.tags,
-            'created_at': datetime.utcnow()
+            'created_at': str(datetime.utcnow())
         }
 
         # self.messages_ref.push(payload) -> NÃO NECESSÁRIO POR AGORA
