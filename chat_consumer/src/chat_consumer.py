@@ -16,14 +16,13 @@ class Bot(commands.Bot):
         self.ref = self.connection_firebase.reference('/gaules')
         self.messages_ref = self.ref.child('messages')
 
-        # self.mongo = connect() # connect mongo
-        # self.messages_collection = self.mongo['gaules']
-
     # Events don't need decorators when subclassed
 
+    # as soon as the bot connects
     async def event_ready(self):
         print(f'Ready | {self.nick}')
 
+    # when message received
     async def event_message(self, message):
         payload = {
             'id': str(message.id),
@@ -38,13 +37,6 @@ class Bot(commands.Bot):
         # self.messages_collection.insert_one(payload)
 
         await self.handle_commands(message)
-
-    # NÃO VAMOS USAR POR AGORA
-
-    # Commands use a decorator...
-    # @commands.command(name='test')
-    # async def my_command(self, ctx):
-    #     await ctx.send(f'Hello {ctx.author.name}!')
 
 
 if __name__ == '__main__':
