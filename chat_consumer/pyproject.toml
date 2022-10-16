@@ -2,7 +2,7 @@
 name = "letmeask-plus"
 version = "0.1.0"
 description = ""
-authors = ["KaioViana"]
+authors = ["KaioViana "]
 license = "MIT"
 
 [tool.poetry.dependencies]

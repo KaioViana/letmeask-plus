@@ -8,17 +8,17 @@ def test_create_bot():
 
 
 def test_empty_bot_id():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert Bot('', 'bot1', 'channel')
 
 
 def test_empty_bot_name():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert Bot('1', '', 'channel')
 
 
 def test_empy_channel():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert Bot('1', 'bo1', '')
 
 

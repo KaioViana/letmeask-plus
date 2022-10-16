@@ -9,7 +9,7 @@ from datetime import datetime
 class Bot(commands.Bot):
 
     def __init__(self):
-        super().__init__(token=settings.TWITCH_TOKEN, client_id=settings.TWITCH_CLIENT_ID, nick='ROBOT_DEV', prefix='!',
+        super().__init__(token=str(settings.TWITCH_TOKEN) , client_id=settings.TWITCH_CLIENT_ID, nick='ROBOT_DEV', prefix='!',
                          initial_channels=['Gaules'])
 
         self.connection_firebase = firebase_config.connect()  # connect firebase
