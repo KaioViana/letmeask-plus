@@ -7,12 +7,12 @@ def test_create_integration():
 
 
 def test_empty_client_id():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert Integration('', 'token')
 
 
 def test_empty_token():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert Integration('client_id', '')
 
 
@@ -27,11 +27,11 @@ def test_change_integration():
 
 def test_change_integration_client_id_to_existing_client_id():
     integration = Integration('client_id', 'token')
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert integration.change_integration('client_id', 'new_token')
 
 
 def test_change_integration_token_to_existing_token():
     integration = Integration('client_id', 'token')
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         assert integration.change_integration('new_client_id', 'token')
